@@ -11,5 +11,4 @@ export class PicShare {
     setLocation(location: string): void {
         this.location = location;
     }
-    
 }

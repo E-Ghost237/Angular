@@ -40,5 +40,7 @@ export class App implements OnInit {
     );
 
     this.myNextPic.setLocation('Paris, France');
+    this.myLastPic.setLocation('New York, USA');
+    this.myPic.setLocation('Tokyo, Japan');
   }
 }
