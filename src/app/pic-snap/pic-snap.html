@@ -16,6 +16,8 @@
             <p>Picsnap créé le {{picshare.createdAt}}</p>
             @if (picshare.location) {
                 <p>Localisation: {{picshare.location}}</p>
+            }@else {
+                <p>Localisation: Non spécifiée</p>
             }
             <p>
                 <button (click)="onSnapImage()">{{snapButtonText}}</button>
