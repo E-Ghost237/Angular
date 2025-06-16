@@ -1,9 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PicShare } from '../models/pic-share';
+import { LowerCasePipe, NgClass, NgStyle, UpperCasePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-pic-snap',
-  imports: [],
+  imports: [NgStyle,
+            NgClass,
+            UpperCasePipe,
+            LowerCasePipe,
+            TitleCasePipe
+
+  ],
   templateUrl: './pic-snap.html',
   styleUrl: './pic-snap.scss'
 })
@@ -14,17 +21,17 @@ export class PicSnap implements OnInit {
   userhasLiked!: boolean;
 
 ngOnInit(): void {
-  this.snapButtonText = 'Like';
+  this.snapButtonText = '👍';
   this.userhasLiked = false;
   }
 
   onSnapImage(): void {
     if (this.userhasLiked) {
       this.picshare.likes--;
-      this.snapButtonText = 'Like';
+      this.snapButtonText = '👍';
     } else {
       this.picshare.likes++;
-      this.snapButtonText = 'Unlike';
+      this.snapButtonText = '👎';
     }
     this.userhasLiked = !this.userhasLiked;
   }
