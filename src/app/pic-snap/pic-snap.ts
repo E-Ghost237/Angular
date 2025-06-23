@@ -1,38 +1,45 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PicShare } from '../models/pic-share';
-import { LowerCasePipe, NgClass, NgStyle, UpperCasePipe, TitleCasePipe } from '@angular/common';
+import { NgClass, NgStyle, UpperCasePipe, DatePipe } from '@angular/common';
+import { PicSnapsService } from '../services/pic-snaps.service';
 
 @Component({
   selector: 'app-pic-snap',
-  imports: [NgStyle,
-            NgClass,
-            UpperCasePipe,
-            LowerCasePipe,
-            TitleCasePipe
-
-  ],
+  imports: [NgStyle, NgClass, UpperCasePipe, DatePipe],
   templateUrl: './pic-snap.html',
-  styleUrl: './pic-snap.scss'
+  styleUrl: './pic-snap.scss',
 })
 export class PicSnap implements OnInit {
-    @Input() picshare!: PicShare;
+  @Input() picshare!: PicShare;
 
   snapButtonText!: string;
   userhasLiked!: boolean;
 
-ngOnInit(): void {
-  this.snapButtonText = '👍';
-  this.userhasLiked = false;
+ constructor(private PicSnapsService: PicSnapsService) { }
+
+  ngOnInit(): void {
+    this.snapButtonText = '👍';
+    this.userhasLiked = false;
   }
 
   onSnapImage(): void {
     if (this.userhasLiked) {
-      this.picshare.likes--;
-      this.snapButtonText = '👍';
+      this.dislike();
     } else {
-      this.picshare.likes++;
-      this.snapButtonText = '👎';
+      this.like();
     }
-    this.userhasLiked = !this.userhasLiked;
+  }
+
+  like(): void {
+    this.PicSnapsService.likePicSnapById(this.picshare.id, 'like');
+    this.snapButtonText = '👎';
+    this.userhasLiked = true;
+  }
+
+  dislike(): void {
+    this.PicSnapsService.likePicSnapById(this.picshare.id, 'dislike');
+    this.snapButtonText = '👍';
+    this.userhasLiked = false;
   }
 }
+

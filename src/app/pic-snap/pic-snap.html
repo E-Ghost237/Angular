@@ -10,10 +10,10 @@
 </head>
 <body>
     <div class="pic-snap-card" [ngClass]="{ snapped: userhasLiked}">
-        <h1>{{picshare.title | titlecase }}</h1>
+        <h1>{{picshare.title | uppercase }}</h1>
             <img [src]="picshare.imageUrl" [alt]='picshare.title'>
             <p>{{picshare.description}}</p>
-            <p>Picsnap créé le {{picshare.createdAt}}</p>
+            <p>Picsnap créé le {{picshare.createdAt | date }}</p>
             @if (picshare.location) {
                 <p>Localisation: {{picshare.location}}</p>
             }@else {
