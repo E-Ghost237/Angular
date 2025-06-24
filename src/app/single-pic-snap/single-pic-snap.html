@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="pic-snap-card" [ngClass]="{ snapped: userhasLiked}">
+        <h1>{{picshare.title | uppercase }}</h1>
+            <img [src]="picshare.imageUrl" [alt]='picshare.title'>
+            <p>{{picshare.description}}</p>
+            <p>Picsnap créé le {{picshare.createdAt | date }}</p>
+            @if (picshare.location) {
+                <p>Localisation: {{picshare.location}}</p>
+            }@else {
+                <p>Localisation: Non spécifiée</p>
+            }
+            <p>
+                <button (click)="onSnapImage()">{{snapButtonText}}</button>
+               <span [ngStyle]="{ color: 'rgb(0,'+ picshare.likes +', 0)'}">{{picshare.likes}}</span></p>
+    </div>
+</body>
+</html>
